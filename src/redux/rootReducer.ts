@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 
-const time = () => {};
+import forecastReducer from './forecast/forecastReducer';
 
-export default combineReducers({ forecast: time });
+export default combineReducers({ forecast: forecastReducer });
