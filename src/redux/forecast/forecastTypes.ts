@@ -15,13 +15,13 @@ export interface Error {
   config: object | null;
 }
 
-export interface Forecast {
+interface Forecast {
   temp: number;
   feels_like: number;
   humidity: number;
 }
 
-export interface Weather {
+interface Weather {
   icon: string;
   main: string;
 }
@@ -29,6 +29,17 @@ export interface Weather {
 export interface CityWeather {
   main: Forecast;
   weather: Weather;
+}
+
+export interface ForecastState {
+  currentWeather: CityWeather[];
+  weekWeather: CityWeather[];
+  searchQuery: string;
+  error: Error | null;
+}
+
+export interface MainState {
+  forecast: ForecastState;
 }
 
 // Search Query
