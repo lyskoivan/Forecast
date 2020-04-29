@@ -1,8 +1,12 @@
 export const SEARCH_QUERY = 'SEARCH_QUERY';
 
-export const CITY_WEATHER_START = 'CITY_WEATHER_START';
-export const CITY_WEATHER_SUCCESS = 'CITY_WEATHER_SUCCESS';
-export const CITY_WEATHER_ERROR = 'CITY_WEATHER_ERROR';
+export const CURRENT_WEATHER_START = 'CURRENT_WEATHER_START';
+export const CURRENT_WEATHER_SUCCESS = 'CURRENT_WEATHER_SUCCESS';
+export const CURRENT_WEATHER_ERROR = 'CURRENT_WEATHER_ERROR';
+
+export const WEEK_WEATHER_START = 'WEEK_WEATHER_START';
+export const WEEK_WEATHER_SUCCESS = 'WEEK_WEATHER_SUCCESS';
+export const WEEK_WEATHER_ERROR = 'WEEK_WEATHER_ERROR';
 
 export interface Error {
   message: string | null;
@@ -11,23 +15,21 @@ export interface Error {
   config: object | null;
 }
 
-// City Weather
-
-interface CityWeatherStartAction {
-  type: typeof CITY_WEATHER_START;
+export interface Forecast {
+  temp: number;
+  feels_like: number;
+  humidity: number;
 }
 
-interface CityWeatherSuccessAction {
-  type: typeof CITY_WEATHER_SUCCESS;
-  payload: { weather: 'something**' };
+export interface Weather {
+  icon: string;
+  main: string;
 }
 
-interface CityWeatherErrorAction {
-  type: typeof CITY_WEATHER_ERROR;
-  payload: { error: Error };
+export interface CityWeather {
+  main: Forecast;
+  weather: Weather;
 }
-
-export type CityWeatherTypes = CityWeatherStartAction | CityWeatherSuccessAction | CityWeatherErrorAction;
 
 // Search Query
 
@@ -37,3 +39,42 @@ interface SearchQueryeAction {
 }
 
 export type SearchQueryTypes = SearchQueryeAction;
+
+// Current Weather
+
+interface CurrentWeatherStartAction {
+  type: typeof WEEK_WEATHER_START;
+}
+
+interface CurrentWeatherSuccessAction {
+  type: typeof WEEK_WEATHER_SUCCESS;
+  payload: { weather: Array<CityWeather> };
+}
+
+interface CurrentWeatherErrorAction {
+  type: typeof WEEK_WEATHER_ERROR;
+  payload: { error: Error };
+}
+
+export type CityWeatherTypes =
+  | CurrentWeatherStartAction
+  | CurrentWeatherSuccessAction
+  | CurrentWeatherErrorAction;
+
+// Week Weather
+
+interface WeekWeatherStartAction {
+  type: typeof CURRENT_WEATHER_START;
+}
+
+interface WeekWeatherSuccessAction {
+  type: typeof CURRENT_WEATHER_SUCCESS;
+  payload: { weather: Array<CityWeather> };
+}
+
+interface WeekWeatherErrorAction {
+  type: typeof CURRENT_WEATHER_ERROR;
+  payload: { error: Error };
+}
+
+export type WeekWeatherTypes = WeekWeatherStartAction | WeekWeatherSuccessAction | WeekWeatherErrorAction;
