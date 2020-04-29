@@ -43,16 +43,16 @@ export type SearchQueryTypes = SearchQueryeAction;
 // Current Weather
 
 interface CurrentWeatherStartAction {
-  type: typeof WEEK_WEATHER_START;
+  type: typeof CURRENT_WEATHER_START;
 }
 
 interface CurrentWeatherSuccessAction {
-  type: typeof WEEK_WEATHER_SUCCESS;
+  type: typeof CURRENT_WEATHER_SUCCESS;
   payload: { weather: Array<CityWeather> };
 }
 
 interface CurrentWeatherErrorAction {
-  type: typeof WEEK_WEATHER_ERROR;
+  type: typeof CURRENT_WEATHER_ERROR;
   payload: { error: Error };
 }
 
@@ -64,16 +64,16 @@ export type CityWeatherTypes =
 // Week Weather
 
 interface WeekWeatherStartAction {
-  type: typeof CURRENT_WEATHER_START;
+  type: typeof WEEK_WEATHER_START;
 }
 
 interface WeekWeatherSuccessAction {
-  type: typeof CURRENT_WEATHER_SUCCESS;
+  type: typeof WEEK_WEATHER_SUCCESS;
   payload: { weather: Array<CityWeather> };
 }
 
 interface WeekWeatherErrorAction {
-  type: typeof CURRENT_WEATHER_ERROR;
+  type: typeof WEEK_WEATHER_ERROR;
   payload: { error: Error };
 }
 
