@@ -27,8 +27,10 @@ interface Weather {
 }
 
 export interface CityWeather {
+  dt: number;
   main: Forecast;
   weather: Weather;
+  dt_txt: string;
 }
 
 export interface ForecastState {

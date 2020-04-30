@@ -7,11 +7,14 @@ module.exports = {
   entry: {
     app: path.join(__dirname, 'src', 'index.tsx'),
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
-    hot: true,
+    historyApiFallback: true,
+
+    filename: '[name].bundle.js',
   },
+
   target: 'web',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -62,8 +65,10 @@ module.exports = {
       },
     ],
   },
+
   output: {
-    filename: '[name].js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [

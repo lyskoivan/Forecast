@@ -1,25 +1,20 @@
-import { connect } from 'react-redux';
-import React from 'react';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import getWeather from '../../redux/forecast/forecastOperations';
+import routes from '../../routes/routes';
 
-import './App.scss';
+const App = (): JSX.Element => (
+  <div>
+    <BrowserRouter>
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Switch>
+          <Route path={routes.HOME_PAGE.path} exact component={routes.HOME_PAGE.component} />
+          <Route path={routes.WEATHER_PAGE.path} component={routes.WEATHER_PAGE.component} />
+          <Redirect to={routes.HOME_PAGE.path} />
+        </Switch>
+      </Suspense>
+    </BrowserRouter>
+  </div>
+);
 
-interface AppStateProps {
-  setWeather: Function;
-}
-
-const App: React.FC<AppStateProps> = ({ setWeather }: AppStateProps): JSX.Element => {
-  setWeather('London');
-  return (
-    <div className="main">
-      <h1>Start </h1>
-    </div>
-  );
-};
-
-const mapDispatchToProps = {
-  setWeather: getWeather,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
