@@ -1,8 +1,12 @@
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import React, { Component, MouseEvent } from 'react';
+import { Route, RouteComponentProps } from 'react-router-dom';
 
+import routes from '../../routes/routes';
+import WeatherHeader from '../../components/WeatherHeader';
+import TodayForecast from '../../components/TodayForecast';
+import FutureForecast from '../../components/FutureForecast';
 import getWeather from '../../redux/forecast/forecastOperations';
 import { getCurrentWeather } from '../../redux/forecast/forecastSelectors';
 import { MainState, CityWeather } from '../../redux/forecast/forecastTypes';
@@ -15,11 +19,11 @@ const getCategoryFromLocation = (location: RouteComponentProps['location']): str
   queryString.parse(location.search).city;
 
 interface WeatherPageStateProps {
-  getCurrentWeather: CityWeather[];
+  todayForecast: CityWeather[];
 }
 
 const mapStateToProps = (store: MainState): WeatherPageStateProps => ({
-  getCurrentWeather: getCurrentWeather(store),
+  todayForecast: getCurrentWeather(store),
 });
 
 const mapDispatchToProps = {
@@ -35,6 +39,7 @@ type WeatherPageProps = WeatherPageStateProps & WeatherPageDispatchProps & Route
 class WeatherPage extends Component<WeatherPageProps, {}> {
   componentDidMount(): void {
     const { location, getWeatherProp } = this.props;
+
     const query = getCategoryFromLocation(location);
 
     if (query) {
@@ -42,10 +47,29 @@ class WeatherPage extends Component<WeatherPageProps, {}> {
     }
   }
 
+  handleOnClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    const { history } = this.props;
+
+    history.push(routes.HOME_PAGE.path);
+  };
+
   render(): JSX.Element {
+    const { match, todayForecast } = this.props;
+
     return (
       <section>
-        <h1>Weather</h1>
+        {todayForecast.length > 0 ? (
+          <WeatherHeader />
+        ) : (
+          <h1>We don&apos;t have a weather forecast for that city.</h1>
+        )}
+
+        <button type="button" onClick={this.handleOnClick}>
+          Back to search
+        </button>
+        <Route path={`${match.path}/future`} component={FutureForecast} />
+        <Route path={`${match.path}`} exact component={TodayForecast} />
       </section>
     );
   }

@@ -1,17 +1,9 @@
 import React, { Suspense } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import routes from '../../routes/routes';
-import getWeather from '../../redux/forecast/forecastOperations';
 
-import './App.scss';
-
-interface AppStateProps {
-  setWeather: Function;
-}
-
-const App: React.FC<AppStateProps> = ({ setWeather }: AppStateProps): JSX.Element => (
+const App = (): JSX.Element => (
   <div>
     <BrowserRouter>
       <Suspense fallback={<h2>Loading...</h2>}>
@@ -25,8 +17,4 @@ const App: React.FC<AppStateProps> = ({ setWeather }: AppStateProps): JSX.Elemen
   </div>
 );
 
-const mapDispatchToProps = {
-  setWeather: getWeather,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
