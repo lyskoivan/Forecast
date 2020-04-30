@@ -68,8 +68,8 @@ class WeatherPage extends Component<WeatherPageProps, {}> {
         <button type="button" onClick={this.handleOnClick}>
           Back to search
         </button>
+        <Route path={`${match.path}/today`} component={TodayForecast} />
         <Route path={`${match.path}/future`} component={FutureForecast} />
-        <Route path={`${match.path}`} exact component={TodayForecast} />
       </section>
     );
   }

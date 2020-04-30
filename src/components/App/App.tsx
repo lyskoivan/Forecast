@@ -1,10 +1,12 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
+import './App.scss';
+
 import routes from '../../routes/routes';
 
 const App = (): JSX.Element => (
-  <div>
+  <div className="main-wrapper">
     <BrowserRouter>
       <Suspense fallback={<h2>Loading...</h2>}>
         <Switch>

@@ -11,7 +11,7 @@ const WeatherHeader = ({ match, location }: RouteComponentProps<MatchParams>): J
       <li>
         <NavLink
           to={{
-            pathname: `${match.url}`,
+            pathname: `${match.url}/today`,
             search: location.search,
           }}
         >
