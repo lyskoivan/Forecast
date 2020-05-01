@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --mode development",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "author": "Ivan Lysko",
   "license": "ISC",
