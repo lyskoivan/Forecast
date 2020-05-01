@@ -19,6 +19,9 @@ interface Forecast {
   temp: number;
   feels_like: number;
   humidity: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
 }
 
 interface Weather {
@@ -29,7 +32,7 @@ interface Weather {
 export interface CityWeather {
   dt: number;
   main: Forecast;
-  weather: Weather;
+  weather: Weather[];
   dt_txt: string;
 }
 

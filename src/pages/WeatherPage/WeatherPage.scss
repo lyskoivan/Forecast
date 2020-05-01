@@ -1,0 +1,30 @@
+@import '../../styles/helpers/variables.scss';
+
+.weather {
+  &-title {
+    margin: 20px 0px;
+    text-align: center;
+    font-family: 'Kaushan Script', cursive;
+    color: $text-black-color;
+    font-weight: 800;
+    font-size: 30px;
+  }
+
+  &-button {
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: $background-gray-color;
+    opacity: 0.6;
+    border: 1px solid transparent;
+    padding: 15px;
+    transition: all ease-in-out 0.2s;
+    border-radius: 2px;
+    outline: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@import '../../styles/helpers/variables.scss';
+
+.ForecastListItem {
+  display: flex;
+  flex-direction: column;
+  min-width: 95%;
+  margin-top: 15px;
+  padding: 25px;
+  box-shadow: 13px 12px 12px -7px rgba(0, 0, 0, 0.75);
+  color: $text-black-color;
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    color: $text-black-color;
+    font-weight: 600;
+    font-size: 18px;
+
+    &-text {
+      padding-right: 15px;
+    }
+  }
+
+  &-date {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}

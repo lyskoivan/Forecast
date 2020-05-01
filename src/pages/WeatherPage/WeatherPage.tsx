@@ -3,7 +3,8 @@ import queryString from 'query-string';
 import React, { Component, MouseEvent } from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
-import routes from '../../routes/routes';
+import './WeatherPage.scss';
+
 import WeatherHeader from '../../components/WeatherHeader';
 import TodayForecast from '../../components/TodayForecast';
 import FutureForecast from '../../components/FutureForecast';
@@ -51,25 +52,29 @@ class WeatherPage extends Component<WeatherPageProps, {}> {
     e.preventDefault();
     const { history } = this.props;
 
-    history.push(routes.HOME_PAGE.path);
+    history.push('/');
   };
 
   render(): JSX.Element {
-    const { match, todayForecast } = this.props;
+    const { match, todayForecast, location } = this.props;
+    const query = getCategoryFromLocation(location);
 
     return (
-      <section>
+      <section className="weather">
         {todayForecast.length > 0 ? (
           <WeatherHeader />
         ) : (
-          <h1>We don&apos;t have a weather forecast for that city.</h1>
+          <h1 className="weather--title">We don&apos;t have a weather forecast for that city.</h1>
         )}
+        <div>
+          {todayForecast.length > 0 && <h1 className="weather-title">{`Weather forecast of ${query}`}</h1>}
+          <button type="button" onClick={this.handleOnClick} className="weather-button">
+            Back to search
+          </button>
+        </div>
 
-        <button type="button" onClick={this.handleOnClick}>
-          Back to search
-        </button>
+        <Route path={`${match.path}/today`} component={TodayForecast} />
         <Route path={`${match.path}/future`} component={FutureForecast} />
-        <Route path={`${match.path}`} exact component={TodayForecast} />
       </section>
     );
   }
