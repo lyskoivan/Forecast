@@ -7,6 +7,18 @@ export const searchQuery = (query: string): types.SearchQueryTypes => ({
   payload: { query },
 });
 
+// Search History
+
+export const searchHistory = (history: string): types.SearchHistoryTypes => ({
+  type: types.SEARCH_HISTORY,
+  payload: { history },
+});
+
+export const deleteFirstSearchHistory = (city: string): types.SearchHistoryTypes => ({
+  type: types.DELETE_FIRST_SEARCH_HISTORY,
+  payload: { city },
+});
+
 // Current Weather
 
 export const currentWeatherStart = (): types.CityWeatherTypes => ({
