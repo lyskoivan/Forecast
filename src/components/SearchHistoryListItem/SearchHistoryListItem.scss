@@ -1,0 +1,21 @@
+@import '../../styles/helpers/variables.scss';
+
+.SearchHistoryListItem {
+  padding-right: 5px;
+  &-button {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: $background-gray-color;
+    opacity: 0.6;
+    border: 1px solid transparent;
+    padding: 8px;
+    transition: all ease-in-out 0.2s;
+    border-radius: 5px;
+    outline: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

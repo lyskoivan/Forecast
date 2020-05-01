@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './SearchHistoryList.scss';
+
 import SearchHistoryListItem from '../SearchHistoryListItem';
 
 interface MainProps {
@@ -7,7 +9,7 @@ interface MainProps {
 }
 
 const SearchHistoryList = ({ searchHistory }: MainProps): JSX.Element => (
-  <ul>
+  <ul className="SearchHistory-list">
     {searchHistory.map(
       (city): JSX.Element => (
         <SearchHistoryListItem key={city} city={city} />

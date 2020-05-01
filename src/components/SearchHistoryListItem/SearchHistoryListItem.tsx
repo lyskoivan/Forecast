@@ -1,6 +1,8 @@
 import React, { MouseEvent } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
+import './SearchHistoryListItem.scss';
+
 interface MainProps {
   city: string;
 }
@@ -28,8 +30,8 @@ const SearchHistoryListItem = ({ city, history }: HistoryItem): JSX.Element => {
   };
 
   return (
-    <li>
-      <button type="button" onClick={handleOnClick}>
+    <li className="SearchHistoryListItem">
+      <button type="button" onClick={handleOnClick} className="SearchHistoryListItem-button">
         {city}
       </button>
     </li>
