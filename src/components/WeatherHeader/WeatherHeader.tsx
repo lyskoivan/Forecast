@@ -1,15 +1,19 @@
 import React from 'react';
 import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 
+import './WeatherHeader.scss';
+
 interface MatchParams {
   id: string;
 }
 
 const WeatherHeader = ({ match, location }: RouteComponentProps<MatchParams>): JSX.Element => (
-  <header>
-    <ul>
-      <li>
+  <header className="WeatherHeader">
+    <ul className="WeatherHeader-list">
+      <li className="WeatherHeader-list-item">
         <NavLink
+          className="WeatherHeader-list-link"
+          activeClassName="WeatherHeader-list-link__active"
           to={{
             pathname: `${match.url}/today`,
             search: location.search,
@@ -18,8 +22,10 @@ const WeatherHeader = ({ match, location }: RouteComponentProps<MatchParams>): J
           Today
         </NavLink>
       </li>
-      <li>
+      <li className="WeatherHeader-list-item">
         <NavLink
+          className="WeatherHeader-list-link"
+          activeClassName="WeatherHeader-list-link__active"
           to={{
             pathname: `${match.url}/future`,
             search: location.search,

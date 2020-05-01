@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './ForecastList.scss';
+
 import ForecastListItem from '../ForecastListItem';
 import { CityWeather } from '../../redux/forecast/forecastTypes';
 
@@ -8,7 +10,7 @@ interface ForecastList {
 }
 
 const ForecastList = ({ forecastList }: ForecastList): JSX.Element => (
-  <ul>
+  <ul className="ForecastList">
     {forecastList.map(
       (item): JSX.Element => (
         <ForecastListItem key={item.dt} forecast={item} />

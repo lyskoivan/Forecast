@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component, SyntheticEvent, ChangeEvent } from 'react';
 
+import './WeatherSearcher.scss';
+
 import { Dispatch } from '../../redux/store';
 import { searchQuery } from '../../redux/forecast/forecastActions';
 import { SearchQueryTypes } from '../../redux/forecast/forecastTypes';
@@ -53,20 +55,22 @@ class WeatherSearcher extends Component<WeatherSearcherProps, WeatherSearcherSta
     const { query } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmitSearchForm} className="SearchForm">
-        <input
-          onChange={this.handleChangeQuery}
-          className="SearchForm-input"
-          value={query}
-          type="text"
-          placeholder="Search city..."
-          autoComplete="off"
-        />
+      <section className="Searchbar">
+        <form onSubmit={this.handleSubmitSearchForm} className="SearchForm">
+          <input
+            onChange={this.handleChangeQuery}
+            className="SearchForm-input"
+            value={query}
+            type="text"
+            placeholder="Search city..."
+            autoComplete="off"
+          />
 
-        <button type="submit" className="SearchForm-button">
-          <span className="SearchForm-button-label">Search</span>
-        </button>
-      </form>
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">Search</span>
+          </button>
+        </form>
+      </section>
     );
   }
 }

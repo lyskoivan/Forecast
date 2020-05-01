@@ -1,5 +1,5 @@
 import * as actions from './forecastActions';
-import { getWeatherForecast } from '../../services/weatherAPI';
+import getWeatherForecast from '../../services/weatherAPI';
 
 import { Dispatch } from '../store';
 import currentForecastFilter from '../../utils/helpers';
