@@ -38,6 +38,19 @@ const SearchQueryReducer = (state = '', action: types.SearchQueryTypes): string 
   }
 };
 
+const SearchHistoryReducer = (state: string[] = [], action: types.SearchHistoryTypes): string[] => {
+  switch (action.type) {
+    case types.SEARCH_HISTORY:
+      return [...state, action.payload.history];
+
+    case types.DELETE_FIRST_SEARCH_HISTORY:
+      return state.filter((city): boolean => city !== action.payload.city);
+
+    default:
+      return state;
+  }
+};
+
 export type ErrorTypes = types.CityWeatherTypes | types.WeekWeatherTypes;
 
 const errorReducer = (state: types.Error | null = null, action: ErrorTypes): types.Error | null => {
@@ -59,5 +72,6 @@ export default combineReducers({
   currentWeather: currentWeatherReducer,
   weekWeather: weekWeatherReducer,
   searchQuery: SearchQueryReducer,
+  searchHistory: SearchHistoryReducer,
   error: errorReducer,
 });

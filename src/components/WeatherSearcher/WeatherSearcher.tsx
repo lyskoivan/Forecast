@@ -4,26 +4,39 @@ import React, { Component, SyntheticEvent, ChangeEvent } from 'react';
 import './WeatherSearcher.scss';
 
 import { Dispatch } from '../../redux/store';
-import { searchQuery } from '../../redux/forecast/forecastActions';
-import { SearchQueryTypes } from '../../redux/forecast/forecastTypes';
+import { getSearchHistory } from '../../redux/forecast/forecastSelectors';
+import { SearchQueryTypes, SearchHistoryTypes, MainState } from '../../redux/forecast/forecastTypes';
+import { searchQuery, searchHistory, deleteFirstSearchHistory } from '../../redux/forecast/forecastActions';
 
 interface SearchProps {
   onSearch: Function;
+  setSearchHistory: Function;
+  deleteSearchItem: Function;
 }
+
+interface SearchStateProps {
+  searchHistoryGet: string[];
+}
+
+const mapStateToProps = (store: MainState): SearchStateProps => ({
+  searchHistoryGet: getSearchHistory(store),
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): SearchProps => ({
   onSearch: (query: string): SearchQueryTypes => dispatch(searchQuery(query)),
+  setSearchHistory: (query: string): SearchHistoryTypes => dispatch(searchHistory(query)),
+  deleteSearchItem: (city: string): SearchHistoryTypes => dispatch(deleteFirstSearchHistory(city)),
 });
 
-interface WeatherSearcherMainProps {
+interface MainProps {
   onSearchGet: Function;
 }
-
-type WeatherSearcherProps = ReturnType<typeof mapDispatchToProps> & WeatherSearcherMainProps;
 
 interface WeatherSearcherState {
   query: string;
 }
+
+type WeatherSearcherProps = ReturnType<typeof mapDispatchToProps> & MainProps & SearchStateProps;
 
 class WeatherSearcher extends Component<WeatherSearcherProps, WeatherSearcherState> {
   state = {
@@ -38,6 +51,7 @@ class WeatherSearcher extends Component<WeatherSearcherProps, WeatherSearcherSta
     e.preventDefault();
 
     const { query } = this.state;
+    const parseQuery = query.toLowerCase();
 
     if (!query) {
       alert('Type some city');
@@ -45,10 +59,17 @@ class WeatherSearcher extends Component<WeatherSearcherProps, WeatherSearcherSta
       return;
     }
 
-    const { onSearch, onSearchGet } = this.props;
+    const { onSearch, onSearchGet, setSearchHistory, deleteSearchItem, searchHistoryGet } = this.props;
 
-    onSearch(query.toLowerCase());
-    onSearchGet(query.toLowerCase());
+    if (!searchHistoryGet.includes(parseQuery)) {
+      if (searchHistoryGet.length === 5) {
+        deleteSearchItem(searchHistoryGet[0]);
+      }
+      setSearchHistory(parseQuery);
+    }
+
+    onSearch(parseQuery);
+    onSearchGet(parseQuery);
   };
 
   render(): JSX.Element {
@@ -75,4 +96,4 @@ class WeatherSearcher extends Component<WeatherSearcherProps, WeatherSearcherSta
   }
 }
 
-export default connect(null, mapDispatchToProps)(WeatherSearcher);
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherSearcher);

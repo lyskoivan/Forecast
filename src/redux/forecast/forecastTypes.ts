@@ -1,5 +1,8 @@
 export const SEARCH_QUERY = 'SEARCH_QUERY';
 
+export const SEARCH_HISTORY = 'SEARCH_HISTORY';
+export const DELETE_FIRST_SEARCH_HISTORY = 'DELETE_FIRST_SEARCH_HISTORY';
+
 export const CURRENT_WEATHER_START = 'CURRENT_WEATHER_START';
 export const CURRENT_WEATHER_SUCCESS = 'CURRENT_WEATHER_SUCCESS';
 export const CURRENT_WEATHER_ERROR = 'CURRENT_WEATHER_ERROR';
@@ -40,6 +43,7 @@ export interface ForecastState {
   currentWeather: CityWeather[];
   weekWeather: CityWeather[];
   searchQuery: string;
+  searchHistory: string[];
   error: Error | null;
 }
 
@@ -55,6 +59,20 @@ interface SearchQueryeAction {
 }
 
 export type SearchQueryTypes = SearchQueryeAction;
+
+// Search History
+
+interface SearchHistoryAction {
+  type: typeof SEARCH_HISTORY;
+  payload: { history: string };
+}
+
+interface DeleteFirstSearchHistoryAction {
+  type: typeof DELETE_FIRST_SEARCH_HISTORY;
+  payload: { city: string };
+}
+
+export type SearchHistoryTypes = SearchHistoryAction | DeleteFirstSearchHistoryAction;
 
 // Current Weather
 
