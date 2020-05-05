@@ -45,6 +45,7 @@ export interface ForecastState {
   searchQuery: string;
   searchHistory: string[];
   error: Error | null;
+  isLoading: boolean;
 }
 
 export interface MainState {

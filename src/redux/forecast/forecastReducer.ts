@@ -51,9 +51,9 @@ const SearchHistoryReducer = (state: string[] = [], action: types.SearchHistoryT
   }
 };
 
-export type ErrorTypes = types.CityWeatherTypes | types.WeekWeatherTypes;
+export type AsyncTypes = types.CityWeatherTypes | types.WeekWeatherTypes;
 
-const errorReducer = (state: types.Error | null = null, action: ErrorTypes): types.Error | null => {
+const errorReducer = (state: types.Error | null = null, action: AsyncTypes): types.Error | null => {
   switch (action.type) {
     case types.CURRENT_WEATHER_START:
     case types.WEEK_WEATHER_START:
@@ -68,10 +68,28 @@ const errorReducer = (state: types.Error | null = null, action: ErrorTypes): typ
   }
 };
 
+const isLoadingReducer = (state = false, action: AsyncTypes): boolean => {
+  switch (action.type) {
+    case types.CURRENT_WEATHER_START:
+    case types.WEEK_WEATHER_START:
+      return true;
+
+    case types.CURRENT_WEATHER_ERROR:
+    case types.WEEK_WEATHER_ERROR:
+    case types.CURRENT_WEATHER_SUCCESS:
+    case types.WEEK_WEATHER_SUCCESS:
+      return false;
+
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   currentWeather: currentWeatherReducer,
   weekWeather: weekWeatherReducer,
   searchQuery: SearchQueryReducer,
   searchHistory: SearchHistoryReducer,
   error: errorReducer,
+  isLoading: isLoadingReducer,
 });
