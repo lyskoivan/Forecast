@@ -144,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 /* harmony import */ var _ForecastList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(111);
-/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83);
+/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(91);
 
 
 
@@ -341,7 +341,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 /* harmony import */ var _ForecastList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(111);
-/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83);
+/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(91);
 
 
 
@@ -364,7 +364,7 @@ var FutureForecast = function (_a) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _forecastActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(84);
+/* harmony import */ var _forecastActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(96);
 /* harmony import */ var _services_weatherAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(122);
 /* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(150);
 
@@ -412,11 +412,11 @@ var getWeatherForecast = function (city) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _getDate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(151);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(151);
 
 var currentForecastFilter = function (timeWeather) {
-    var startDay = _getDate__WEBPACK_IMPORTED_MODULE_0__["default"].getStartDay() <= Date.parse(timeWeather.dt_txt);
-    var endDay = _getDate__WEBPACK_IMPORTED_MODULE_0__["default"].getStartDay(1) > Date.parse(timeWeather.dt_txt);
+    var startDay = Date.parse(Object(date_fns__WEBPACK_IMPORTED_MODULE_0__["startOfToday"])().toString()) <= Date.parse(timeWeather.dt_txt);
+    var endDay = Date.parse(Object(date_fns__WEBPACK_IMPORTED_MODULE_0__["startOfTomorrow"])().toString()) > Date.parse(timeWeather.dt_txt);
     return startDay && endDay;
 };
 /* harmony default export */ __webpack_exports__["default"] = (currentForecastFilter);
@@ -424,23 +424,7 @@ var currentForecastFilter = function (timeWeather) {
 
 /***/ }),
 
-/***/ 151:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-    getStartDay: function (days) {
-        if (days === void 0) { days = 0; }
-        var date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + days).toString();
-        return Date.parse(date);
-    },
-});
-
-
-/***/ }),
-
-/***/ 83:
+/***/ 91:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -449,15 +433,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWeekWeather", function() { return getWeekWeather; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchHistory", function() { return getSearchHistory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchQuery", function() { return getSearchQuery; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsLoading", function() { return getIsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
 var getCurrentWeather = function (store) { return store.forecast.currentWeather; };
 var getWeekWeather = function (store) { return store.forecast.weekWeather; };
 var getSearchHistory = function (store) { return store.forecast.searchHistory; };
 var getSearchQuery = function (store) { return store.forecast.searchQuery; };
+var getIsLoading = function (store) { return store.forecast.isLoading; };
+var getError = function (store) { return store.forecast.error; };
 
 
 /***/ }),
 
-/***/ 84:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -544,7 +532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TodayForecast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(109);
 /* harmony import */ var _components_FutureForecast__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(119);
 /* harmony import */ var _redux_forecast_forecastOperations__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(121);
-/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(83);
+/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(91);
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -573,6 +561,8 @@ var getCategoryFromLocation = function (location) {
 };
 var mapStateToProps = function (store) { return ({
     todayForecast: Object(_redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_9__["getCurrentWeather"])(store),
+    reduxError: Object(_redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_9__["getError"])(store),
+    isLoading: Object(_redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_9__["getIsLoading"])(store),
 }); };
 var mapDispatchToProps = {
     getWeatherProp: _redux_forecast_forecastOperations__WEBPACK_IMPORTED_MODULE_8__["default"],
@@ -596,15 +586,15 @@ var WeatherPage = /** @class */ (function (_super) {
         }
     };
     WeatherPage.prototype.render = function () {
-        var _a = this.props, match = _a.match, todayForecast = _a.todayForecast, location = _a.location;
+        var _a = this.props, match = _a.match, isLoading = _a.isLoading, location = _a.location, reduxError = _a.reduxError;
         var query = getCategoryFromLocation(location);
-        return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("section", { className: "weather" },
-            todayForecast.length > 0 ? (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_WeatherHeader__WEBPACK_IMPORTED_MODULE_5__["default"], null)) : (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", { className: "weather--title" }, "We don't have a weather forecast for that city.")),
+        return (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, isLoading ? (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, "Loading...")) : (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("section", { className: "weather" },
+            !reduxError ? (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_WeatherHeader__WEBPACK_IMPORTED_MODULE_5__["default"], null)) : (react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", { className: "weather-title" }, "We don't have a weather forecast for that city.")),
             react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null,
-                todayForecast.length > 0 && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", { className: "weather-title" }, "Weather forecast of " + query),
+                !reduxError && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", { className: "weather-title" }, "Weather forecast of " + query),
                 react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", { type: "button", onClick: this.handleOnClick, className: "weather-button" }, "Back to search")),
-            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], { path: match.path + "/today", component: _components_TodayForecast__WEBPACK_IMPORTED_MODULE_6__["default"] }),
-            react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], { path: match.path + "/future", component: _components_FutureForecast__WEBPACK_IMPORTED_MODULE_7__["default"] })));
+            !reduxError && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], { path: match.path + "/today", component: _components_TodayForecast__WEBPACK_IMPORTED_MODULE_6__["default"] }),
+            !reduxError && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], { path: match.path + "/future", component: _components_FutureForecast__WEBPACK_IMPORTED_MODULE_7__["default"] })))));
     };
     return WeatherPage;
 }(react__WEBPACK_IMPORTED_MODULE_2__["Component"]));

@@ -21,48 +21,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _HomePage_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(77);
 /* harmony import */ var _HomePage_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_HomePage_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_WeatherSearcher__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(79);
-/* harmony import */ var _components_SearchHistory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85);
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
+/* harmony import */ var _components_SearchHistory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(79);
+/* harmony import */ var _components_WeatherSearcher__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92);
+
+
+
+
+var HomePage = function (_a) {
+    var history = _a.history;
+    var handleSearchQueryGet = function (query) {
+        if (query) {
+            history.push({
+                pathname: '/weather/today',
+                search: "city=" + query,
+            });
+        }
     };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-
-var HomePage = /** @class */ (function (_super) {
-    __extends(HomePage, _super);
-    function HomePage() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.handleSearchQueryGet = function (query) {
-            var history = _this.props.history;
-            if (query) {
-                history.push({
-                    pathname: '/weather/today',
-                    search: "city=" + query,
-                });
-            }
-        };
-        return _this;
-    }
-    HomePage.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", { className: "home-wrapper" },
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", { className: "home-title" }, "Find out the weather of your city"),
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_WeatherSearcher__WEBPACK_IMPORTED_MODULE_2__["default"], { onSearchGet: this.handleSearchQueryGet }),
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchHistory__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
-    };
-    return HomePage;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", { className: "home-wrapper" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", { className: "home-title" }, "Find out the weather of your city"),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_WeatherSearcher__WEBPACK_IMPORTED_MODULE_3__["default"], { onSearchGet: handleSearchQueryGet }),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchHistory__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+};
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);
 
 
@@ -112,9 +91,9 @@ module.exports = exports;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _WeatherSearcher__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(80);
+/* harmony import */ var _SearchHistory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(80);
 
-/* harmony default export */ __webpack_exports__["default"] = (_WeatherSearcher__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (_SearchHistory__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),
@@ -124,13 +103,273 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _SearchHistory_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(81);
+/* harmony import */ var _SearchHistory_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_SearchHistory_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _SearchHistoryList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83);
+/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(91);
+
+
+
+
+
+var mapStateToProps = function (store) { return ({
+    searchHistory: Object(_redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_4__["getSearchHistory"])(store),
+}); };
+var SearchHistory = function (_a) {
+    var searchHistory = _a.searchHistory;
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", { className: "SearchHistory" }, searchHistory.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchHistoryList__WEBPACK_IMPORTED_MODULE_3__["default"], { searchHistory: searchHistory })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(SearchHistory));
+
+
+/***/ }),
+
+/***/ 81:
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(48);
+            var content = __webpack_require__(82);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ 82:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(50);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".SearchHistory {\n  width: 40%; }\n\n@media (max-width: 780px) {\n  .SearchHistory {\n    width: 60%; } }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 83:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SearchHistoryList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(84);
+
+/* harmony default export */ __webpack_exports__["default"] = (_SearchHistoryList__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ 84:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _SearchHistoryList_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(85);
+/* harmony import */ var _SearchHistoryList_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_SearchHistoryList_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87);
+
+
+
+var SearchHistoryList = function (_a) {
+    var searchHistory = _a.searchHistory;
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", { className: "SearchHistory-list" }, searchHistory.map(function (city) { return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_2__["default"], { key: city, city: city })); })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (SearchHistoryList);
+
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(48);
+            var content = __webpack_require__(86);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(50);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".SearchHistory-list {\n  padding: 0;\n  margin: 10px 0px 0px 0px;\n  display: flex;\n  justify-content: center;\n  list-style-type: none; }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 87:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88);
+
+/* harmony default export */ __webpack_exports__["default"] = (_SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ 88:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
+/* harmony import */ var _SearchHistoryListItem_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(89);
+/* harmony import */ var _SearchHistoryListItem_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_SearchHistoryListItem_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var SearchHistoryListItem = function (_a) {
+    var city = _a.city, history = _a.history;
+    var handleSearchQueryGet = function (query) {
+        if (query) {
+            history.push({
+                pathname: '/weather/today',
+                search: "city=" + query,
+            });
+        }
+    };
+    var handleOnClick = function (e) {
+        e.preventDefault();
+        handleSearchQueryGet(city);
+    };
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", { className: "SearchHistoryListItem" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", { type: "button", onClick: handleOnClick, className: "SearchHistoryListItem-button" }, city)));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(SearchHistoryListItem));
+
+
+/***/ }),
+
+/***/ 89:
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(48);
+            var content = __webpack_require__(90);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ 90:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(50);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".SearchHistoryListItem {\n  padding-right: 5px; }\n  .SearchHistoryListItem-button {\n    cursor: pointer;\n    font-weight: 600;\n    font-size: 18px;\n    background-color: #e7e7e7;\n    opacity: 0.6;\n    border: 1px solid transparent;\n    padding: 8px;\n    transition: all ease-in-out 0.2s;\n    border-radius: 5px;\n    outline: none; }\n    .SearchHistoryListItem-button:hover {\n      opacity: 1; }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 91:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentWeather", function() { return getCurrentWeather; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWeekWeather", function() { return getWeekWeather; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchHistory", function() { return getSearchHistory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchQuery", function() { return getSearchQuery; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsLoading", function() { return getIsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
+var getCurrentWeather = function (store) { return store.forecast.currentWeather; };
+var getWeekWeather = function (store) { return store.forecast.weekWeather; };
+var getSearchHistory = function (store) { return store.forecast.searchHistory; };
+var getSearchQuery = function (store) { return store.forecast.searchQuery; };
+var getIsLoading = function (store) { return store.forecast.isLoading; };
+var getError = function (store) { return store.forecast.error; };
+
+
+/***/ }),
+
+/***/ 92:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WeatherSearcher__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(93);
+
+/* harmony default export */ __webpack_exports__["default"] = (_WeatherSearcher__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _WeatherSearcher_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(81);
+/* harmony import */ var _WeatherSearcher_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94);
 /* harmony import */ var _WeatherSearcher_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_WeatherSearcher_scss__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83);
-/* harmony import */ var _redux_forecast_forecastActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(84);
+/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(91);
+/* harmony import */ var _redux_forecast_forecastActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(96);
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -202,11 +441,11 @@ var WeatherSearcher = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ 81:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(48);
-            var content = __webpack_require__(82);
+            var content = __webpack_require__(95);
 
             content = content.__esModule ? content.default : content;
 
@@ -227,7 +466,7 @@ module.exports = content.locals || {};
 
 /***/ }),
 
-/***/ 82:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -241,24 +480,7 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ 83:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentWeather", function() { return getCurrentWeather; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWeekWeather", function() { return getWeekWeather; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchHistory", function() { return getSearchHistory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchQuery", function() { return getSearchQuery; });
-var getCurrentWeather = function (store) { return store.forecast.currentWeather; };
-var getWeekWeather = function (store) { return store.forecast.weekWeather; };
-var getSearchHistory = function (store) { return store.forecast.searchHistory; };
-var getSearchQuery = function (store) { return store.forecast.searchQuery; };
-
-
-/***/ }),
-
-/***/ 84:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -312,245 +534,6 @@ var weekWeatherError = function (error) { return ({
     type: _forecastTypes__WEBPACK_IMPORTED_MODULE_0__["WEEK_WEATHER_ERROR"],
     payload: { error: error },
 }); };
-
-
-/***/ }),
-
-/***/ 85:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SearchHistory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86);
-
-/* harmony default export */ __webpack_exports__["default"] = (_SearchHistory__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-/***/ }),
-
-/***/ 86:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
-/* harmony import */ var _SearchHistory_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87);
-/* harmony import */ var _SearchHistory_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_SearchHistory_scss__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _SearchHistoryList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(89);
-/* harmony import */ var _redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(83);
-
-
-
-
-
-var mapStateToProps = function (store) { return ({
-    searchHistory: Object(_redux_forecast_forecastSelectors__WEBPACK_IMPORTED_MODULE_4__["getSearchHistory"])(store),
-}); };
-var SearchHistory = function (_a) {
-    var searchHistory = _a.searchHistory;
-    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", { className: "SearchHistory" }, searchHistory.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchHistoryList__WEBPACK_IMPORTED_MODULE_3__["default"], { searchHistory: searchHistory })));
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(SearchHistory));
-
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(48);
-            var content = __webpack_require__(88);
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
-
-/***/ }),
-
-/***/ 88:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(50);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".SearchHistory {\n  width: 40%; }\n\n@media (max-width: 780px) {\n  .SearchHistory {\n    width: 60%; } }\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 89:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SearchHistoryList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(90);
-
-/* harmony default export */ __webpack_exports__["default"] = (_SearchHistoryList__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-/***/ }),
-
-/***/ 90:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _SearchHistoryList_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(91);
-/* harmony import */ var _SearchHistoryList_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_SearchHistoryList_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93);
-
-
-
-var SearchHistoryList = function (_a) {
-    var searchHistory = _a.searchHistory;
-    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", { className: "SearchHistory-list" }, searchHistory.map(function (city) { return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_2__["default"], { key: city, city: city })); })));
-};
-/* harmony default export */ __webpack_exports__["default"] = (SearchHistoryList);
-
-
-/***/ }),
-
-/***/ 91:
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(48);
-            var content = __webpack_require__(92);
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
-
-/***/ }),
-
-/***/ 92:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(50);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".SearchHistory-list {\n  padding: 0;\n  margin: 10px 0px 0px 0px;\n  display: flex;\n  justify-content: center;\n  list-style-type: none; }\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 93:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(94);
-
-/* harmony default export */ __webpack_exports__["default"] = (_SearchHistoryListItem__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-/***/ }),
-
-/***/ 94:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
-/* harmony import */ var _SearchHistoryListItem_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(95);
-/* harmony import */ var _SearchHistoryListItem_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_SearchHistoryListItem_scss__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-var SearchHistoryListItem = function (_a) {
-    var city = _a.city, history = _a.history;
-    var handleSearchQueryGet = function (query) {
-        if (query) {
-            history.push({
-                pathname: '/weather/today',
-                search: "city=" + query,
-            });
-        }
-    };
-    var handleOnClick = function (e) {
-        e.preventDefault();
-        handleSearchQueryGet(city);
-    };
-    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", { className: "SearchHistoryListItem" },
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", { type: "button", onClick: handleOnClick, className: "SearchHistoryListItem-button" }, city)));
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(SearchHistoryListItem));
-
-
-/***/ }),
-
-/***/ 95:
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(48);
-            var content = __webpack_require__(96);
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
-
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(50);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".SearchHistoryListItem {\n  padding-right: 5px; }\n  .SearchHistoryListItem-button {\n    cursor: pointer;\n    font-weight: 600;\n    font-size: 18px;\n    background-color: #e7e7e7;\n    opacity: 0.6;\n    border: 1px solid transparent;\n    padding: 8px;\n    transition: all ease-in-out 0.2s;\n    border-radius: 5px;\n    outline: none; }\n    .SearchHistoryListItem-button:hover {\n      opacity: 1; }\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ })

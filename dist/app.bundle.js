@@ -35597,12 +35597,28 @@ var errorReducer = function (state, action) {
             return state;
     }
 };
+var isLoadingReducer = function (state, action) {
+    if (state === void 0) { state = false; }
+    switch (action.type) {
+        case _forecastTypes__WEBPACK_IMPORTED_MODULE_1__["CURRENT_WEATHER_START"]:
+        case _forecastTypes__WEBPACK_IMPORTED_MODULE_1__["WEEK_WEATHER_START"]:
+            return true;
+        case _forecastTypes__WEBPACK_IMPORTED_MODULE_1__["CURRENT_WEATHER_ERROR"]:
+        case _forecastTypes__WEBPACK_IMPORTED_MODULE_1__["WEEK_WEATHER_ERROR"]:
+        case _forecastTypes__WEBPACK_IMPORTED_MODULE_1__["CURRENT_WEATHER_SUCCESS"]:
+        case _forecastTypes__WEBPACK_IMPORTED_MODULE_1__["WEEK_WEATHER_SUCCESS"]:
+            return false;
+        default:
+            return state;
+    }
+};
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
     currentWeather: currentWeatherReducer,
     weekWeather: weekWeatherReducer,
     searchQuery: SearchQueryReducer,
     searchHistory: SearchHistoryReducer,
     error: errorReducer,
+    isLoading: isLoadingReducer,
 }));
 
 
