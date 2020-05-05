@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import './HomePage.scss';
 
-import WeatherSearcher from '../../components/WeatherSearcher';
 import SearchHistory from '../../components/SearchHistory';
+import WeatherSearcher from '../../components/WeatherSearcher';
 
 interface MatchParams {
   id: string;
 }
 
-class HomePage extends Component<RouteComponentProps<MatchParams>> {
-  handleSearchQueryGet = (query: string): void => {
-    const { history } = this.props;
-
+const HomePage = ({ history }: RouteComponentProps<MatchParams>): JSX.Element => {
+  const handleSearchQueryGet = (query: string): void => {
     if (query) {
       history.push({
         pathname: '/weather/today',
@@ -22,15 +20,13 @@ class HomePage extends Component<RouteComponentProps<MatchParams>> {
     }
   };
 
-  render(): JSX.Element {
-    return (
-      <section className="home-wrapper">
-        <h1 className="home-title">Find out the weather of your city</h1>
-        <WeatherSearcher onSearchGet={this.handleSearchQueryGet} />
-        <SearchHistory />
-      </section>
-    );
-  }
-}
+  return (
+    <section className="home-wrapper">
+      <h1 className="home-title">Find out the weather of your city</h1>
+      <WeatherSearcher onSearchGet={handleSearchQueryGet} />
+      <SearchHistory />
+    </section>
+  );
+};
 
 export default HomePage;

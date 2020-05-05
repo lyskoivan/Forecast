@@ -1,4 +1,4 @@
-Project link [Searcher](https://lyskoivan.github.io/).
+Project link [Forecast](https://lysko-forecast.netlify.app/).
 
 ## Usage
 

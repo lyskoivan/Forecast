@@ -1,9 +1,10 @@
-import dateUntils from './getDate';
+import { startOfToday, startOfTomorrow } from 'date-fns';
+
 import { CityWeather } from '../redux/forecast/forecastTypes';
 
 const currentForecastFilter = (timeWeather: CityWeather): boolean => {
-  const startDay = dateUntils.getStartDay() <= Date.parse(timeWeather.dt_txt);
-  const endDay = dateUntils.getStartDay(1) > Date.parse(timeWeather.dt_txt);
+  const startDay = Date.parse(startOfToday().toString()) <= Date.parse(timeWeather.dt_txt);
+  const endDay = Date.parse(startOfTomorrow().toString()) > Date.parse(timeWeather.dt_txt);
   return startDay && endDay;
 };
 
